@@ -1,0 +1,20 @@
+.uucss-center-content-outer {
+	background-color: #e0e0e0;
+}
+
+#uucss-appointment {
+	background-color: transparent !important;	
+}
+
+.uucss-icon {
+    margin-bottom: -20px;
+}
+
+#uucss-start {
+	z-index: 2;	
+	position: relative;
+}
+
+#uucss-end {
+	z-index: 1;	
+}

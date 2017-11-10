@@ -1,3 +1,4 @@
+# back-end : firebase
 # Dependency directories
 node_modules
 functions/node_modules
@@ -9,3 +10,24 @@ npm-debug.log*
 
 # Optional npm cache directory
 .npm
+
+# front-end : reactjs
+# dependencies
+/public/node_modules
+
+# testing
+/public/coverage
+
+# production
+/public/build
+
+# misc
+/public/.DS_Store
+/public/.env.local
+/public/.env.development.local
+/public/.env.test.local
+/public/.env.production.local
+
+/public/npm-debug.log*
+/public/yarn-debug.log*
+/public/yarn-error.log*

@@ -1,0 +1,29 @@
+.uucss-center-content-outer {
+	background-color: #e0e0e0;
+}
+
+#uucss-header-help {
+	padding-top: 10px;
+	font-size: 1em !important;
+}
+
+#uucss-header-content {
+	font-size: 0.75em !important;
+}
+
+#uucss-help {
+	height: 400px;
+	overflow-y: auto;
+}
+
+#uucss-card-date {
+	font-size: 1em !important;
+}
+
+.uucss-in-card {
+	color: #7b1113 !important;
+}
+
+.uucss-date-detail .content {
+	padding: 5px !important;
+}
