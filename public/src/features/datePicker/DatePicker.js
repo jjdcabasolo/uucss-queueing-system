@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Card, Checkbox, Divider, Grid, Header } from 'semantic-ui-react'
 
 import './assets/DatePicker.css';
 
 const DateCard = () => (
-	<Grid.Row centered column={1}>-
+	<Grid.Row centered column={1} className="uucss-remove-top">
 		<Grid.Column centered computer={8} mobile={16}>
 		  <Card className="uucss-card">
 		    <Card.Content>
+		    	<div style={ {backgroundColor:'red',} }>
+		      </div>
 		      <Card.Header textAlign="left" className="uucss-card-header" id="uucss-card-date">
 		      	<Checkbox  />
 		        &nbsp;04 October 2017 (Mon)
@@ -67,10 +70,14 @@ class DatePicker extends Component {
 
 				<Grid.Row centered column={2}>
 					<Grid.Column centered computer={4} mobile={8}>
-						<Button className="uucss-btn"> Back </Button>
+						<Link to="/setapp">
+							<Button className="uucss-btn"> Back </Button>
+						</Link>
 					</Grid.Column>
 					<Grid.Column centered computer={4} mobile={8}>
-						<Button className="uucss-btn"> Choose </Button>
+						<Link to="/setapp">
+							<Button className="uucss-btn"> Choose </Button>
+						</Link>
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>

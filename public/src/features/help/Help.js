@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Card, Grid, Header } from 'semantic-ui-react'
 
 import './assets/Help.css';
@@ -17,7 +18,7 @@ class Help extends Component {
 				</Grid.Row>	
 
 				<Grid.Row centered column={1}>
-					<Grid.Column centered computer={8} mobile={16}>
+					<Grid.Column centered computer={16}>
 					  <Card className="uucss-card" id="uucss-help">
 					    <Card.Content>
 					      <Card.Header className="uucss-card-header" id="uucss-header-help">
@@ -39,7 +40,9 @@ class Help extends Component {
 
 				<Grid.Row centered column={2}>
 					<Grid.Column centered computer={4} mobile={8}>
-						<Button className="uucss-btn"> Back </Button>
+						<Link to="/">
+							<Button className="uucss-btn"> Back </Button>
+						</Link>
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>

@@ -26,7 +26,7 @@
 }
 
 .uucss-card-header {
-	font-size: 2em !important;
+	font-size: 1.5em !important;
 	text-align: center;
 	color: #7b1113 !important;
 }
@@ -42,6 +42,7 @@
 
 .uucss-logo {
     margin-bottom: -65px;
+    width: 200px;
 }
 
 .uucss-center-content {
@@ -68,10 +69,10 @@
 .uucss-center-content-inner {
     margin-left: auto;
     margin-right: auto; 
+    background-color: #e0e0e0;
 }
 
 .uucss-input {
-    font-size: 1.25rem !important;
     width: 100%;
 }
 

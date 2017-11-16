@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Card, Grid, Header, Image, Input, Label } from 'semantic-ui-react'
 
 import './assets/SetApp.css';
@@ -48,16 +49,22 @@ class SetApp extends Component {
 
 				<Grid.Row centered column={1} className="uucss-remove-top">
 					<Grid.Column centered computer={8} mobile={16}>
-						<Input label='Date' className="uucss-input"/>
+						<Link to="/datepicker">
+							<Input label='Date' className="uucss-input"/>
+						</Link>
 					</Grid.Column>
 				</Grid.Row>
 
 				<Grid.Row centered column={2}>
 					<Grid.Column centered computer={4} mobile={8}>
-						<Button className="uucss-btn"> Login </Button>
+						<Link to="">
+							<Button className="uucss-btn"> Login </Button>
+						</Link>
 					</Grid.Column>
 					<Grid.Column centered computer={4} mobile={8}>
-						<Button className="uucss-btn"> Back </Button>
+						<Link to="/">
+							<Button className="uucss-btn"> Back </Button>
+						</Link>
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>

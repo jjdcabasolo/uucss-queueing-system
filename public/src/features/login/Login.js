@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Card, Grid, Header, Image, Input, Label } from 'semantic-ui-react'
 
 import './assets/Login.css';
@@ -39,7 +40,9 @@ class Login extends Component {
 						<Button className="uucss-btn"> Login </Button>
 					</Grid.Column>
 					<Grid.Column centered computer={4} mobile={8}>
-						<Button className="uucss-btn"> Back </Button>
+						<Link to="/">
+							<Button className="uucss-btn"> Back </Button>
+						</Link>
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>
