@@ -5,6 +5,11 @@ import { Button, Card, Grid, Header } from 'semantic-ui-react'
 import './assets/Help.css';
 
 class Help extends Component {
+	constructor(props) {
+		super(props);
+		console.log(props);
+	}
+
   render() {
     return (
     	<Grid container columns={4}>

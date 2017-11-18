@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, Grid, Header, Image, Input, Label } from 'semantic-ui-react'
+import { Button, Grid, Header, Image, Input } from 'semantic-ui-react'
 
 import './assets/Login.css';
 import Icon from './assets/person.png';
 
 class Login extends Component {
+	constructor(props) {
+		super(props);
+		this.state = props;
+	}
+
   render() {
+  	console.log("hola");
     return (
     	<Grid container columns={4}>
 				<Grid.Row column={1}>

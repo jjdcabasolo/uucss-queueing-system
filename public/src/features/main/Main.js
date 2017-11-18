@@ -9,8 +9,8 @@ class Main extends Component {
   render() {
     return (
     	<Grid container columns={4}>
-				<Grid.Row column={1}>
-					<Grid.Column centered computer={16}>
+				<Grid.Row centered column={1}>
+					<Grid.Column computer={16}>
 						<Image src={ UPLBlogo } centered className="uucss-logo"/>
 						<Header as='h1' block textAlign="center" className="uucss-maroon-header">
 							<br />
@@ -21,7 +21,7 @@ class Main extends Component {
 				</Grid.Row>
 
 				<Grid.Row centered column={1}>
-					<Grid.Column centered computer={8} mobile={16}>
+					<Grid.Column computer={8} mobile={16}>
 					  <Card className="uucss-card">
 					    <Card.Content>
 					      <Card.Header className="uucss-card-header">
@@ -39,12 +39,12 @@ class Main extends Component {
 				</Grid.Row>
 
 				<Grid.Row centered column={2}>
-					<Grid.Column centered computer={4} mobile={8}>
+					<Grid.Column computer={4} mobile={8}>
 						<Link to="/setapp">
 							<Button className="uucss-btn"> Set </Button>
 						</Link>
 					</Grid.Column>
-					<Grid.Column centered computer={4} mobile={8}>
+					<Grid.Column computer={4} mobile={8}>
 						<Link to="/help">
 							<Button className="uucss-btn"> Help </Button>
 						</Link>

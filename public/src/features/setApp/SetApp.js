@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, Grid, Header, Image, Input, Label } from 'semantic-ui-react'
+import { Button, Grid, Header, Image, Input } from 'semantic-ui-react'
 
 import './assets/SetApp.css';
 import Icon from './assets/person.png';
