@@ -145,7 +145,10 @@ const ModalTurn = () => (
 class Main extends Component {
 	constructor(props) {
 		super(props);
-		this.state = props;
+		this.state = {
+			...props,
+			formatted_date: [new Date()]
+		};
 	}
 
   render() {
@@ -171,9 +174,9 @@ class Main extends Component {
 					      </Card.Header>
 					      <Card.Description className="uucss-card-desc">
 					      	However, you can try setting an appointment in another date. Below is a list of possible dates. <br /><br />
-					      	- 04 October 2017 (Monday) <br />
-					      	- 05 October 2017 (Tuesday) <br />
-					      	- 06 October 2017 (Wednesday)
+					      	{this.state.formatted_date.map((d) => {
+						         return (<li>{d.toDateString()}</li>)
+						       })}
 					      </Card.Description>
 					    </Card.Content>
 					  </Card>

@@ -21,7 +21,8 @@ class App extends Component {
 			middle_name: null,
 			first_name: null,
 			appoint_date: null,
-			plate_num: null
+			plate_num: null,
+			appointment_dates: []
 		}
 	}
 
@@ -38,7 +39,9 @@ class App extends Component {
 					    <Route path='/login' render={(props) => (
 							  <Help {...props} value={this.state.value} />
 							)}/>
-					    <Route path='/setapp' component={SetApp}/>
+					    <Route path='/setapp' render={(props) => (
+							  <SetApp {...props} value={this.state.value} />
+							)}/>
 					    <Route path='/datePicker' component={DatePicker}/>
 					  </Switch>
 			    </div>
@@ -47,12 +50,5 @@ class App extends Component {
     );
   }
 }
-			    	// <SetApp />
-			    	// <Help />
-			    	// <DatePicker />
-			    	// <Login />
 
-
-	    // <Splash />
-	   
 export default App;

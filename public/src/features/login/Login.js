@@ -12,7 +12,6 @@ class Login extends Component {
 	}
 
   render() {
-  	console.log("hola");
     return (
     	<Grid container columns={4}>
 				<Grid.Row column={1}>
@@ -31,13 +30,13 @@ class Login extends Component {
 
 				<Grid.Row centered column={1}>
 					<Grid.Column centered computer={8} mobile={16}>
-						<Input label='Last Name' className="uucss-input"/>
+						<Input type="text" name="last_name" label='Last Name' className="uucss-input"/>
 					</Grid.Column>
 				</Grid.Row>
 
 				<Grid.Row centered column={1} className="uucss-remove-top">
 					<Grid.Column centered computer={8} mobile={16}>
-						<Input label='Plate No.' className="uucss-input"/>
+						<Input type="text" name="plate_no" label='Plate No.' className="uucss-input"/>
 					</Grid.Column>
 				</Grid.Row>
 
