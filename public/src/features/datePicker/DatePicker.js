@@ -53,6 +53,11 @@ const DateCard = () => (
 )
 
 class DatePicker extends Component {
+	constructor(props) {
+		super(props);
+		this.state = props;
+	}
+	
   render() {
     return (
     	<Grid container columns={4}>

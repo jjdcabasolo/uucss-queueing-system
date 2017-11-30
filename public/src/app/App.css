@@ -98,3 +98,8 @@
 .uucss-maroon {
     color: #7b1113 !important;
 }
+
+.uucss-modal-header {
+    background-color: #7b1113 !important;
+    color: white !important;
+}
