@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-const config = {
+var config = {
     apiKey: "AIzaSyDdbmOHaHr1-935Ur7XvmXWI3WNaExQWZ4",
     authDomain: "uucss-queueing-system.firebaseapp.com",
     databaseURL: "https://uucss-queueing-system.firebaseio.com",
@@ -8,4 +8,6 @@ const config = {
     messagingSenderId: "963296599914"
   };
 firebase.initializeApp(config);
+export const provider = new firebase.auth.PhoneAuthProvider();
+export const auth = firebase.auth();
 export default firebase;

@@ -1,21 +1,61 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Grid, Header, Image, Input } from 'semantic-ui-react'
-
+import { Button, Grid, Header, Image, Input } from 'semantic-ui-react';
 import './assets/SetApp.css';
 import Icon from './assets/person.png';
+import firebase from '../../firebase';
+
 
 class SetApp extends Component {
 	constructor(props) {
 		super(props);
-		this.state = props;
+
+		this.state = {
+			first_name: this.props.first_name,
+			middle_name: this.props.middle_name,
+			last_name: this.props.last_name,
+			plate_no: this.props.plate_no,
+			phone_num: this.props.phone_num,
+			queue_num: this.props.queue_num,
+			serving_num: this.props.serving_num
+		}
+
 		this.onHandleChange = this.onHandleChange.bind(this);
+		this.saveData = this.saveData.bind(this);
 	}
 
 	onHandleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
 		});
+	}
+
+	saveData = () => {
+		const data = {
+			first_name: this.state.first_name,
+			middle_name: this.state.middle_name,
+			last_name: this.state.last_name,
+			plate_no: this.state.plate_no,
+			appoint_date: new Date().toString(),
+			phone_num: this.state.phone_num
+		}
+
+
+		let date = new Date().getDate() + "" + new Date().getMonth() + "" + new Date().getFullYear();
+		const queueRef = firebase.database().ref("queue/"+date);
+		console.log(data);
+		queueRef.push(this.state);
+
+		// get queue stuff
+		queueRef.on('value', (snapshot) => {
+		  const queueList = snapshot.val();
+			this.setState({
+				queue_num: queueList.in_queue + 1,
+			})
+		});
+
+		this.props.action(data);
+		// this.props.history.push("/main");
 	}
 
   render() {
@@ -32,6 +72,12 @@ class SetApp extends Component {
 								UPLB Unified Car Sticker System
 							</Header>
 						</div>
+					</Grid.Column>
+				</Grid.Row>
+
+				<Grid.Row centered column={1} className="uucss-deduct-bottom">
+					<Grid.Column computer={8} mobile={16}>
+						<Input type="text" name="phone_num" label="Phone Number" value={this.state.phone_num} onChange={this.onHandleChange} className="uucss-input"/>
 					</Grid.Column>
 				</Grid.Row>
 
@@ -69,8 +115,8 @@ class SetApp extends Component {
 
 				<Grid.Row centered column={2}>
 					<Grid.Column computer={4} mobile={8}>
-						<Link to="">
-							<Button className="uucss-btn"> Done </Button>
+						<Link to="/main">
+							<Button className="uucss-btn" onClick={this.saveData}> Done </Button>
 						</Link>
 					</Grid.Column>
 					<Grid.Column computer={4} mobile={8}>

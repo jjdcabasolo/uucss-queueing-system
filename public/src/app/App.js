@@ -22,8 +22,26 @@ class App extends Component {
 			first_name: null,
 			appoint_date: null,
 			plate_num: null,
-			appointment_dates: []
+			phone_num: '',
+			appointment_dates: [],
+			user: '',
+			queue_num: 0,
+			serving_num: 0
 		}
+
+		this.handler = this.handler.bind(this);
+	}
+
+	handler = (info) => {
+		this.setState({
+			first_name: info.first_name,
+			middle_name: info.middle_name,
+			last_name: info.last_name,
+			plate_no: info.plate_no,
+			appoint_date: info.appoint_date,
+			phone_num: info.phone_num,
+			queue_num: info.queue_num
+		});
 	}
 
   render() {
@@ -34,13 +52,13 @@ class App extends Component {
 				    <Switch>
 					    <Route exact path='/'component={Main} />
 					    <Route path='/help' render={(props) => (
-							  <Help {...props} value={this.state.value} />
+							  <Help {...props} value={this.state} />
 							)}/>
 					    <Route path='/login' render={(props) => (
-							  <Help {...props} value={this.state.value} />
+							  <Login {...props} value={this.state} />
 							)}/>
 					    <Route path='/setapp' render={(props) => (
-							  <SetApp {...props} value={this.state.value} />
+							  <SetApp {...props} value={this.state} action={this.handler}/>
 							)}/>
 					    <Route path='/datePicker' component={DatePicker}/>
 					  </Switch>
