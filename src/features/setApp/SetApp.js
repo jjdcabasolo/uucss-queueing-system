@@ -36,26 +36,36 @@ class SetApp extends Component {
 			middle_name: this.state.middle_name,
 			last_name: this.state.last_name,
 			plate_no: this.state.plate_no,
-			appoint_date: new Date().toString(),
-			phone_num: this.state.phone_num
+			appoint_date: new Date(),
+			phone_num: this.state.phone_num,
+			queue_num: 0
 		}
 
-		// increment queue number
-		let date = new Date().getDate() + "" + new Date().getMonth() + "" + new Date().getFullYear();
-		const queueRef = firebase.database().ref("queue/"+date);
-		console.log(data);
-		queueRef.push(this.state);
+		// get reference for the date
+		let date = data.appoint_date.getDate() + "" + data.appoint_date.getMonth() + "" + data.appoint_date.getFullYear();
+		console.log("date");
+		console.log(date);
 
-		// get queue stuff
+		const queueRef = firebase.database().ref("queueing_sys/queue/"+date+"/");
+		const peopleRef = firebase.database().ref("queueing_sys/queue/"+date+"/people");
+		let queueList = []
+
+
+		// push data to database
 		queueRef.on('value', (snapshot) => {
-		  const queueList = snapshot.val();
-			this.setState({
-				queue_num: queueList.in_queue + 1,
-			})
+		  queueList = snapshot.val();
+			console.log("reference in database")
+			console.log(snapshot.val())
+			console.log(queueList.in_queue)
+			data.queue_num = queueList.in_queue + 1
 		});
 
+		// update state of app
+		delete data.appoint_date;
+		queueRef.push(data);
+		data["isLoggedIn"] = true;
 		this.props.action(data);
-		// this.props.history.push("/main");
+		this.props.history.push("/main");
 	}
 
   render() {
@@ -115,9 +125,7 @@ class SetApp extends Component {
 
 				<Grid.Row centered column={2}>
 					<Grid.Column computer={4} mobile={8}>
-						<Link to="/main">
-							<Button className="uucss-btn" onClick={this.saveData}> Done </Button>
-						</Link>
+						<Button className="uucss-btn" onClick={this.saveData}> Done </Button>
 					</Grid.Column>
 					<Grid.Column computer={4} mobile={8}>
 						<Link to="/">

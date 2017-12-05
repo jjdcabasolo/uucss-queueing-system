@@ -24,7 +24,6 @@ class App extends Component {
 			plate_num: null,
 			phone_num: '',
 			appointment_dates: [],
-			user: '',
 			queue_num: 0,
 			serving_num: 0
 		}
