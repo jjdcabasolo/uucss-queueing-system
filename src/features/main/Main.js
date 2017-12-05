@@ -145,15 +145,27 @@ const ModalTurn = () => (
 class Main extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
-			...props,
-			formatted_date: [new Date()]
-		};
+			// isLoggedIn: this.props.isLoggedIn,
+			// queue_num: this.props.queue_num,
+			// serving_num: this.props.serving_num,
+			isLoggedIn: false,
+			queue_num: 20,
+			serving_num: 50,
+			totalpeople: 100,
+			eta: 10,
+			appointment_dates: 	[
+														new Date("October 13, 2014 1:10:00"),
+														new Date("February 6, 2016 1:10:00"),
+														new Date("March 27, 2017 1:10:00")
+													]	
+		}
 	}
 
   render() {
     return (
-    	<Grid container columns={4}>
+	    <Grid container columns={4}>
 				<Grid.Row centered column={1}>
 					<Grid.Column computer={16}>
 						<Image src={ UPLBlogo } centered className="uucss-logo"/>
@@ -167,19 +179,86 @@ class Main extends Component {
 
 				<Grid.Row centered column={1}>
 					<Grid.Column computer={8} mobile={16}>
-					  <Card className="uucss-card">
-					    <Card.Content>
-					      <Card.Header className="uucss-card-header">
-					      	No ongoing appointment today.
-					      </Card.Header>
-					      <Card.Description className="uucss-card-desc">
-					      	However, you can try setting an appointment in another date. Below is a list of possible dates. <br /><br />
-					      	{this.state.formatted_date.map((d) => {
-						         return (<li>{d.toDateString()}</li>)
-						       })}
-					      </Card.Description>
-					    </Card.Content>
-					  </Card>
+
+						{this.state.isLoggedIn ? (
+						  <Card className="uucss-card" id="uucss-remove-padding">
+						    <Card.Content>
+						      <Card.Header className="uucss-loggedin-header">
+						      	Now serving
+						      </Card.Header>
+						      <Card.Description className="uucss-loggedin-bignum">
+						      	{this.state.serving_num}
+						      </Card.Description> <br/><br/>
+						      <Card.Description className="uucss-loggedin-lower">
+						      	12 12 12 12
+						      </Card.Description> <br/><br/>
+						      <Card.Header className="uucss-loggedin-header">
+						      	Your number
+						      </Card.Header>
+						      <Card.Description className="uucss-loggedin-bignum">
+						      	{this.state.queue_num}
+						      </Card.Description> <br/><br/>
+						      <Card.Description>
+						      	<Grid>
+						      		<Grid.Row centered column={2}>
+						      			<Grid.Column computer={8} mobile={16} centered>
+						      				<div className="uucss-loggedin-lower">
+							      				{this.state.eta}
+							      			</div>
+						      				<div className="uucss-loggedin-lower-detail">
+										      	people in queue
+							      			</div>
+						      			</Grid.Column>
+						      			<Grid.Column computer={8} mobile={16} centered>
+									      	<div className="uucss-loggedin-lower">
+							      				{this.state.totalpeople}
+							      			</div>
+						      				<div className="uucss-loggedin-lower-detail">
+										      	estimated service time
+							      			</div>
+						      			</Grid.Column>
+						      		</Grid.Row>
+						      	</Grid>
+						      </Card.Description>
+						    </Card.Content>
+						  </Card>							
+						) : (
+							this.state.totalpeople < 100 ? (
+							  <Card className="uucss-card">
+							    <Card.Content>
+							      <Card.Header className="uucss-card-header">
+							      	No ongoing appointment today.
+							      </Card.Header>
+							      <Card.Description className="uucss-card-desc">
+							      	However, you can try setting an appointment in another date. Below is a list of possible dates. <br /><br />
+							      	{this.state.appointment_dates.map((d) => {
+								         return (<li>{d.toDateString()}</li>)
+								       })}
+							      </Card.Description>
+							    </Card.Content>
+							  </Card>	
+							) : (
+							  <Card className="uucss-card" id="uucss-remove-padding">
+							    <Card.Content><br/><br/><br/>
+							      <Card.Description id="uucss-loggedin-verylarge">
+							      	{this.state.serving_num}
+							      </Card.Description><br/><br/>
+							      <Card.Description className="uucss-noongoing-title">
+							      	now serving
+							      </Card.Description><br/>
+							      <Divider/><br/>
+							      <Card.Description className="uucss-loggedin-bignum">
+							      	{this.state.queue_num}
+							      </Card.Description><br/>
+							      <Card.Description className="uucss-noongoing-title">
+							      	people in queue
+							      </Card.Description><br/>
+							    </Card.Content>
+							  </Card>									
+							)
+						)}
+
+					
 					</Grid.Column>
 				</Grid.Row>
 

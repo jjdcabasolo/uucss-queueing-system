@@ -5,3 +5,49 @@
 #uucss-appointment {
 	background-color: transparent !important;	
 }
+
+.uucss-loggedin-header {
+	font-size: 1.25em !important;
+	text-align: center;
+	background-color: #7b1113 !important;
+	color: white !important;
+	padding: 2px;
+}
+
+.uucss-loggedin-bignum {
+	font-size: 3em !important;
+	text-align: center;
+	color: #7b1113 !important;
+	font-weight: 900;
+}
+
+#uucss-loggedin-verylarge {
+	font-size: 5em !important;
+	text-align: center;
+	color: #7b1113 !important;
+	font-weight: 900;
+}
+
+.uucss-loggedin-lower {
+	font-size: 2em !important;
+	text-align: center;
+	color: #7b1113 !important;
+	font-weight: 900;
+}	
+
+.uucss-loggedin-lower-detail {
+	font-size: 0.75em !important;
+	background-color: #7b1113 !important;
+	color: white !important;
+	margin-top: 10px;	
+	text-align: center;
+	padding: 2px;
+}	
+
+#uucss-remove-padding .content{
+	padding: 0px !important;
+}
+
+.uucss-noongoing-title {
+	text-align: center;
+}

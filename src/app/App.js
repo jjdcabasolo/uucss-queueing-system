@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 
 // import Splash from '../features/splash/Splash';
 
-import DatePicker from '../features/datePicker/DatePicker';
 import Help from '../features/help/Help';
 import Login from '../features/login/Login';
 import Main from '../features/main/Main';
@@ -59,7 +58,6 @@ class App extends Component {
 					    <Route path='/setapp' render={(props) => (
 							  <SetApp {...props} value={this.state} action={this.handler}/>
 							)}/>
-					    <Route path='/datePicker' component={DatePicker}/>
 					  </Switch>
 			    </div>
 			  </div>
