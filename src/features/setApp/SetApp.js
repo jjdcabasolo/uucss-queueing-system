@@ -11,22 +11,24 @@ class SetApp extends Component {
 	constructor(props) {
 		super(props);
 
+		console.log(this.props);
 		this.state = {
-			first_name: this.props.first_name,
-			middle_name: this.props.middle_name,
-			last_name: this.props.last_name,
-			plate_no: this.props.plate_no,
-			phone_num: this.props.phone_num,
-			queue_num: this.props.queue_num,
-			serving_num: this.props.serving_num,
+			first_name: this.props.value.first_name,
+			middle_name: this.props.value.middle_name,
+			last_name: this.props.value.last_name,
+			plate_no: this.props.value.plate_no,
+			phone_num: this.props.value.phone_num,
+			queue_num: this.props.value.queue_num,
+			serving_num: this.props.value.serving_num,
 			appointment_dates: 	[
 														new Date("October 13, 2014 1:10:00"),
 														new Date("February 6, 2016 1:10:00"),
 														new Date("March 27, 2017 1:10:00")
 													],
-			appoint_date: this.props.appoint_date
+			appoint_date: this.props.value.appoint_date,
+			isLoggedIn: this.props.value.isLoggedIn
 		}
-		
+
 		this.onHandleChange = this.onHandleChange.bind(this);
 		this.saveData = this.saveData.bind(this);
 		this.onDateChange = this.onDateChange.bind(this);
@@ -46,7 +48,7 @@ class SetApp extends Component {
 			plate_no: this.state.plate_no,
 			appoint_date: this.state.appoint_date,
 			phone_num: this.state.phone_num,
-			queue_num: this.state.queue_num
+			queue_num: 0
 		}
 
 		// get date from the input field date
@@ -56,15 +58,17 @@ class SetApp extends Component {
 		let date = dateformat.getDate() + "" + dateformat.getMonth() + "" + dateformat.getFullYear();
 
 		// get data from firebase
-		const queueRef = firebase.database().ref("queueing_sys/queue/"+date+"/");
-		const peopleRef = firebase.database().ref("queueing_sys/queue/"+date+"/people");
+		const queueRef = firebase.database().ref("queueing_sys/queue/" + date + "/");
+		const peopleRef = firebase.database().ref("queueing_sys/queue/" + date + "/people");
 		let queueList = []
 
 		// push data to database
-		queueRef.on('value', (snapshot) => {
+		queueRef.once('value', (snapshot) => {
 		  queueList = snapshot.val();
-			data.queue_num = queueList.in_queue + 1
-		}, () => {
+			data.queue_num = queueList.in_queue + 1;
+
+			console.log(queueList);
+
 			// update state of app
 			console.log("data");
 			console.log(data);
@@ -74,17 +78,18 @@ class SetApp extends Component {
 				in_queue: data.queue_num
 			})
 			data["isLoggedIn"] = true;
+
+			console.log(data);
+			this.props.action(data);
+			this.props.toggle();
+			this.props.history.push("/");
 		});
-
-		this.props.action(data);
-		this.props.history.push("/");
-
 	}
 
 	onDateChange = (e, { value }) => {
 		this.setState({ value })
 		this.state.appoint_date = value;
-	}	
+	}
 
   render() {
     return (
@@ -165,7 +170,7 @@ class SetApp extends Component {
 										      		<Grid.Row column={1}>
 											      		<Grid.Column width={6}>
 																  <Card className="uucss-card uucss-date-detail">
-																    <Card.Content>	
+																    <Card.Content>
 																      <Card.Header textAlign="center" className="uucss-in-card">
 																      	25
 																      </Card.Header>
@@ -204,7 +209,7 @@ class SetApp extends Component {
 
 				<Grid.Row centered column={2}>
 					<Grid.Column computer={4} mobile={8}>
-						<Link to="/main">
+						<Link to="/">
 							<Button className="uucss-btn" onClick={this.saveData}> Done </Button>
 						</Link>
 					</Grid.Column>

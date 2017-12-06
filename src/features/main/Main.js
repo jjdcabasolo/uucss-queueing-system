@@ -148,9 +148,9 @@ class Main extends Component {
 		super(props);
 
 		this.state = {
-			isLoggedIn: this.props.isLoggedIn,
-			queue_num: this.props.queue_num,
-			serving_num: this.props.serving_num,
+			isLoggedIn: this.props.value.isLoggedIn,
+			queue_num: this.props.value.queue_num,
+			serving_num: this.props.value.serving_num,
 			eta: 10,
 			appointment_dates: 	[
 									new Date("October 13, 2014 1:10:00"),
@@ -158,6 +158,8 @@ class Main extends Component {
 									new Date("March 27, 2017 1:10:00")
 								]	
 		}
+
+		console.log(this.state);
 	}
 
 	componentDidMount = () => {
@@ -215,7 +217,7 @@ class Main extends Component {
 						      	{this.state.serving_num}
 						      </Card.Description> <br/><br/>
 						      <Card.Description className="uucss-loggedin-lower">
-						      	12 12 12 12
+						      
 						      </Card.Description> <br/><br/>
 						      <Card.Header className="uucss-loggedin-header">
 						      	Your number

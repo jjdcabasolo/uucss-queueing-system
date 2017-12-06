@@ -17,13 +17,14 @@ class Login extends Component {
 			plate_no: this.props.value.plate_no,
 			phone_num: '',
 			user: this.props.value.user,
-			code: ''
+			code: '',
+			isLoggedIn: this.props.value.isLoggedIn
 		}		
 
 		console.log("ahdsfuhs");
 		console.log(this.state);
 		
-		this.saveToDB = this.saveToDB.bind(this);
+		this.getUsers = this.getUsers.bind(this);
 		this.onSignInSubmit = this.onSignInSubmit.bind(this);
 		this.inputCode = this.inputCode.bind(this);
 		this.onHandleChange = this.onHandleChange.bind(this);
@@ -63,30 +64,52 @@ class Login extends Component {
 		});
 	}
 
-	saveToDB = () => {
+	getUsers = () => {
 		console.log(this.state);
-		const dataRef = firebase.database().ref("messages");
 		const data = {
 			first_name: this.state.first_name,
 			middle_name: this.state.middle_name,
 			last_name: this.state.last_name,
 			plate_no: this.state.plate_no,
-			phone_num: this.state.phone_num
+			phone_num: this.state.phone_num,
+			isLoggedIn: this.state.isLoggedIn
 		}
 
-	  dataRef.push(this.state);
+	  const queueRef = firebase.database().ref("queueing_sys/queue/");
 
-	  firebase.auth().useDeviceLanguage();
-		window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('login', {
-		  'size': 'invisible',
-		  'callback': function(response) {
-		    // reCAPTCHA solved, allow signInWithPhoneNumber.
-		    console.log("something");
-		    this.onSignInSubmit();
-		  }
+		// get data to database
+		queueRef.once('value', (snapshot) => {
+		  const queueList = snapshot.val();
+		  const phone = [];
+
+			for (const key in queueList) {
+				for (const people in queueList[key]) {
+					if(queueList[key][people]["phone_num"] == data.phone_num){
+						console.log("MATCH NAAAA");
+						const details = queueList[key][people];
+						data.first_name = details["first_name"];
+						data.middle_name = details["middle_name"];
+						data.last_name = details["last_name"];
+						data.plate_no = details["plate_no"];
+						data.appoint_date = details["appoint_date"];
+						data.phone_num = details["phone_num"];
+						data.queue_num = details["queue_num"];
+						data.isLoggedIn = true;
+
+						console.log(data);
+						this.props.toggle();
+						this.props.action(data);
+						this.props.history.push("/");
+
+						break;
+					}
+				}
+			}
 		});
-	} 
 
+		
+
+	}
 
   render() {
     return (
@@ -113,7 +136,7 @@ class Login extends Component {
 
 				<Grid.Row centered column={2}>
 					<Grid.Column computer={4} mobile={8}>
-						<Button className="uucss-btn" id="login" onClick={this.saveToDB}> Login </Button>
+						<Button className="uucss-btn" id="login" onClick={this.getUsers}> Login </Button>
 					</Grid.Column>
 					<Grid.Column computer={4} mobile={8}>
 						<Link to="/">

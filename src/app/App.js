@@ -28,9 +28,12 @@ class App extends Component {
 		}
 
 		this.handler = this.handler.bind(this);
+		this.match = this.match.bind(this);
 	}
 
 	handler = (info) => {
+		console.log(info)
+		console.log(info.isLoggedIn)
 		this.setState({
 			first_name: info.first_name,
 			middle_name: info.middle_name,
@@ -38,7 +41,20 @@ class App extends Component {
 			plate_no: info.plate_no,
 			appoint_date: info.appoint_date,
 			phone_num: info.phone_num,
-			queue_num: info.queue_num
+			queue_num: info.queue_num,
+			isLoggedIn: info.isLoggedIn
+		}, () => {
+			console.log(this.state)
+		});
+	}
+
+	match = () => {
+		this.setState({
+			isLoggedIn: true
+		}, () => {
+			console.log(this.state.isLoggedIn)
+			this.state.isLoggedIn = true;
+			// console.log(this.state)
 		});
 	}
 
@@ -55,10 +71,10 @@ class App extends Component {
 							  <Help {...props} value={this.state} action={this.handler} />
 							)}/>
 					    <Route path='/login' render={(props) => (
-							  <Login {...props} value={this.state} action={this.handler}/>
+							  <Login {...props} value={this.state} action={this.handler} toggle={this.match}/>
 							)}/>
 					    <Route path='/setapp' render={(props) => (
-							  <SetApp {...props} value={this.state} action={this.handler}/>
+							  <SetApp {...props} value={this.state} action={this.handler} toggle={this.match}/>
 							)}/>
 					  </Switch>
 			    </div>
