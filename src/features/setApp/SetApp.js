@@ -46,7 +46,7 @@ class SetApp extends Component {
 			plate_no: this.state.plate_no,
 			appoint_date: this.state.appoint_date,
 			phone_num: this.state.phone_num,
-			queue_num: 0
+			queue_num: this.state.queue_num
 		}
 
 		// get date from the input field date
@@ -54,8 +54,6 @@ class SetApp extends Component {
 
 		// get reference for the date
 		let date = dateformat.getDate() + "" + dateformat.getMonth() + "" + dateformat.getFullYear();
-		// console.log("date");
-		// console.log(date);
 
 		// get data from firebase
 		const queueRef = firebase.database().ref("queueing_sys/queue/"+date+"/");
@@ -65,18 +63,22 @@ class SetApp extends Component {
 		// push data to database
 		queueRef.on('value', (snapshot) => {
 		  queueList = snapshot.val();
-			console.log("reference in database")
-			console.log(snapshot.val())
-			console.log(queueList.in_queue)
 			data.queue_num = queueList.in_queue + 1
+		}, () => {
+			// update state of app
+			console.log("data");
+			console.log(data);
+			delete data.appoint_date;
+			queueRef.push(data);
+			queueRef.update({
+				in_queue: data.queue_num
+			})
+			data["isLoggedIn"] = true;
 		});
 
-		// update state of app
-		delete data.appoint_date;
-		queueRef.push(data);
-		data["isLoggedIn"] = true;
 		this.props.action(data);
 		this.props.history.push("/");
+
 	}
 
 	onDateChange = (e, { value }) => {
@@ -202,7 +204,9 @@ class SetApp extends Component {
 
 				<Grid.Row centered column={2}>
 					<Grid.Column computer={4} mobile={8}>
-						<Button className="uucss-btn" onClick={this.saveData}> Done </Button>
+						<Link to="/main">
+							<Button className="uucss-btn" onClick={this.saveData}> Done </Button>
+						</Link>
 					</Grid.Column>
 					<Grid.Column computer={4} mobile={8}>
 						<Link to="/">

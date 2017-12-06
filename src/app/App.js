@@ -48,12 +48,14 @@ class App extends Component {
 			  <div className="uucss-center-content-middle">
 			    <div className="uucss-center-content-inner">
 				    <Switch>
-					    <Route exact path='/'component={Main} />
+					    <Route exact path='/' render={(props) => (
+							  <Main {...props} value={this.state} action={this.handler} />
+							)}/>
 					    <Route path='/help' render={(props) => (
-							  <Help {...props} value={this.state} />
+							  <Help {...props} value={this.state} action={this.handler} />
 							)}/>
 					    <Route path='/login' render={(props) => (
-							  <Login {...props} value={this.state} />
+							  <Login {...props} value={this.state} action={this.handler}/>
 							)}/>
 					    <Route path='/setapp' render={(props) => (
 							  <SetApp {...props} value={this.state} action={this.handler}/>

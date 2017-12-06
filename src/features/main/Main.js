@@ -4,6 +4,7 @@ import { Button, Card, Checkbox, Grid, Divider, Header, Icon, Image, Label, Moda
 
 import './assets/Main.css';
 import UPLBlogo from './assets/UPLBlogo.png';
+import firebase from '../../firebase';
 
 const Dates = () => (
   <Card className="uucss-card">
@@ -147,23 +148,47 @@ class Main extends Component {
 		super(props);
 
 		this.state = {
-			// isLoggedIn: this.props.isLoggedIn,
-			// queue_num: this.props.queue_num,
-			// serving_num: this.props.serving_num,
-			isLoggedIn: false,
-			queue_num: 20,
-			serving_num: 50,
-			totalpeople: 100,
+			isLoggedIn: this.props.isLoggedIn,
+			queue_num: this.props.queue_num,
+			serving_num: this.props.serving_num,
 			eta: 10,
 			appointment_dates: 	[
-														new Date("October 13, 2014 1:10:00"),
-														new Date("February 6, 2016 1:10:00"),
-														new Date("March 27, 2017 1:10:00")
-													]	
+									new Date("October 13, 2014 1:10:00"),
+									new Date("February 6, 2016 1:10:00"),
+									new Date("March 27, 2017 1:10:00")
+								]	
 		}
 	}
 
+	componentDidMount = () => {
+		console.log("didmount");
+		console.log(this.state);
+	}
+
+	componentWillMount = () => {
+
+		let dateformat = new Date();
+
+		// get reference for the date
+		let date = dateformat.getDate() + "" + dateformat.getMonth() + "" + dateformat.getFullYear();
+		console.log(date);
+		const queueRef = firebase.database().ref("queueing_sys/queue/"+date+"/");
+		let queueList = []
+
+		queueRef.on('value', (snapshot) => {
+			queueList = snapshot.val();
+			console.log("queuelist");
+			console.log(queueList);
+			this.setState({
+				serving_num: queueList.serving_num,
+				totalpeople: queueList.in_queue
+			});
+		});
+	}
+
   render() {
+  	console.log("state:");
+  	console.log(this.state);
     return (
 	    <Grid container columns={4}>
 				<Grid.Row centered column={1}>
@@ -223,7 +248,7 @@ class Main extends Component {
 						    </Card.Content>
 						  </Card>							
 						) : (
-							this.state.totalpeople < 100 ? (
+							this.state.totalpeople >= 100 ? (
 							  <Card className="uucss-card">
 							    <Card.Content>
 							      <Card.Header className="uucss-card-header">
