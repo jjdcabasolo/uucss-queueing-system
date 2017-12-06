@@ -151,7 +151,7 @@ class Main extends Component {
 			isLoggedIn: this.props.value.isLoggedIn,
 			queue_num: this.props.value.queue_num,
 			serving_num: this.props.value.serving_num,
-			eta: 10,
+			eta: 0,
 			appointment_dates: 	[
 									new Date("October 13, 2014 1:10:00"),
 									new Date("February 6, 2016 1:10:00"),
@@ -159,7 +159,7 @@ class Main extends Component {
 								]	
 		}
 
-		console.log(this.state);
+
 	}
 
 	componentDidMount = () => {
@@ -168,7 +168,6 @@ class Main extends Component {
 	}
 
 	componentWillMount = () => {
-
 		let dateformat = new Date();
 
 		// get reference for the date
@@ -185,6 +184,29 @@ class Main extends Component {
 				serving_num: queueList.serving_num,
 				totalpeople: queueList.in_queue
 			});
+
+			const today = new Date();
+			// service starts at 8:00am
+			today.setHours(8, 0, 0);
+			// const people = queueList.in_queue;
+			const people = 50;
+
+			// service time per person in minutes
+			const service_time = 10;
+			const total_time_before = people * service_time;
+			const offset_hour = total_time_before / 60;
+			console.log(people);
+			console.log(total_time_before);
+			today.setHours(today.getHours() + offset_hour);
+			const offset_min = total_time_before % 60;
+			today.setMinutes(today.getMinutes() + offset_min);
+			// let min = today.setMinutes();
+			// if(today.setMinutes == 0){
+			// 	min = "00";
+			// }
+			console.log(today);
+
+			this.state.eta = today.getHours() + ":" + today.getMinutes();
 		});
 	}
 
@@ -230,7 +252,7 @@ class Main extends Component {
 						      		<Grid.Row centered column={2}>
 						      			<Grid.Column computer={8} mobile={16} centered>
 						      				<div className="uucss-loggedin-lower">
-							      				{this.state.eta}
+							      				{this.state.totalpeople}
 							      			</div>
 						      				<div className="uucss-loggedin-lower-detail">
 										      	people in queue
@@ -238,7 +260,7 @@ class Main extends Component {
 						      			</Grid.Column>
 						      			<Grid.Column computer={8} mobile={16} centered>
 									      	<div className="uucss-loggedin-lower">
-							      				{this.state.totalpeople}
+							      				{this.state.eta}
 							      			</div>
 						      				<div className="uucss-loggedin-lower-detail">
 										      	estimated service time
@@ -250,7 +272,7 @@ class Main extends Component {
 						    </Card.Content>
 						  </Card>							
 						) : (
-							this.state.totalpeople >= 100 ? (
+							this.state.totalpeople >= 50 ? (
 							  <Card className="uucss-card">
 							    <Card.Content>
 							      <Card.Header className="uucss-card-header">

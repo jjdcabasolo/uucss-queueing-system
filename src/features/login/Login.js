@@ -80,7 +80,6 @@ class Login extends Component {
 		// get data to database
 		queueRef.once('value', (snapshot) => {
 		  const queueList = snapshot.val();
-		  const phone = [];
 
 			for (const key in queueList) {
 				for (const people in queueList[key]) {
@@ -106,9 +105,6 @@ class Login extends Component {
 				}
 			}
 		});
-
-		
-
 	}
 
   render() {

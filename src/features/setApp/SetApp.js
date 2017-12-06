@@ -65,9 +65,9 @@ class SetApp extends Component {
 		// push data to database
 		queueRef.once('value', (snapshot) => {
 		  queueList = snapshot.val();
+			console.log(queueList);
 			data.queue_num = queueList.in_queue + 1;
 
-			console.log(queueList);
 
 			// update state of app
 			console.log("data");
