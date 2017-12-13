@@ -1,0 +1,24 @@
+#uucss-splash-outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+	background-color: #7b1113;
+}
+
+#uucss-splash-middle {
+    display: table-cell;
+    vertical-align: middle;
+	background-color: #7b1113;
+}
+
+#uucss-splash-inner {
+    margin-left: auto;
+    margin-right: auto; 
+	background-color: #7b1113;
+}
+
+#uucss-splash {
+  margin-top: 40px;
+  color: #e0e0e0;
+}

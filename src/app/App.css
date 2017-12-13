@@ -1,0 +1,138 @@
+.uucss-btn {
+	background-color: #ffffff !important;
+	border-style: solid !important;
+	border-width: 2px !important;
+	border-color: #7b1113 !important;
+	color: #7b1113 !important;
+    font-size: 1.25rem !important;
+    letter-spacing: 2px !important;
+    width: 100% !important;
+}
+
+.uucss-btn:hover {
+	background-color: #7b1113 !important;
+	color: #ffffff !important;
+}
+
+.uucss-card {
+	background-color: #ffffff !important;
+	border-style: solid !important;
+	border-width: 2px !important;
+	border-color: #7b1113 !important;
+	color: #7b1113 !important;
+    font-size: 1.25rem !important;
+    letter-spacing: 1.5px !important;
+    width: 100% !important;	
+}
+
+.uucss-card-header {
+	font-size: 1.5em !important;
+	text-align: center;
+	color: #7b1113 !important;
+}
+
+.uucss-card-desc {
+	color: #7b1113 !important;
+}
+
+.uucss-maroon-header {
+	background-color: #7b1113 !important;
+	color: #ffffff !important;
+}
+
+.uucss-logo {
+    margin-bottom: -65px;
+    width: 200px;
+}
+
+.uucss-center-content {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.uucss-center-content-outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.uucss-center-content-middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.uucss-center-content-inner {
+    margin-left: auto;
+    margin-right: auto; 
+    background-color: #e0e0e0;
+}
+
+.uucss-input {
+    width: 100%;
+}
+
+.uucss-input .label {
+    background-color: #7b1113;
+    color: white;
+}
+
+.uucss-input input {
+    border-style: solid !important;
+    border-width: 2px !important;
+    border-color: #7b1113 !important;   
+}
+
+.uucss-remove-top {
+    padding-top: 0px !important;
+}
+
+.uucss-deduct-bottom {
+    padding-bottom: 5px !important;
+}
+
+.uucss-maroon {
+    color: #7b1113 !important;
+}
+
+.uucss-modal-header {
+    background-color: #7b1113 !important;
+    color: white !important;
+}
+
+.uucss-center-content-outer {
+    background-color: #e0e0e0;
+}
+/*
+#uucss-header-help {
+    padding-top: 10px;
+    font-size: 1em !important;
+}
+
+#uucss-header-content {
+    font-size: 0.75em !important;
+}
+
+#uucss-help {
+    height: 400px;
+    overflow-y: auto;
+}
+
+*/
+
+.uucss-card-date {
+    font-size: 0.75em !important;
+}
+
+.uucss-in-card {
+    color: #7b1113 !important;
+}
+
+.uucss-date-detail .content {
+    padding: 5px !important;
+    background-color: #e0e0e0 !important;
+}
